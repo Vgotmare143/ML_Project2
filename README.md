@@ -1,5 +1,9 @@
 # Student Exam Performance Predictor
 
+**Live demo:** https://student-performance-predictor-lut2.onrender.com
+
+> Hosted on Render's free plan, so the first load after inactivity can take 30-60 seconds.
+
 An end-to-end machine learning web app that predicts a student's **math exam score** from reading and writing scores, study habits and background. A static glassmorphism frontend talks to a Flask REST API that serves a trained scikit-learn model, and everything ships in one Docker container.
 
 ![App screenshot](data/screenshot.png)
@@ -110,14 +114,16 @@ Run this from the project root. Open http://localhost:8000. Trained model files 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate            # Windows  (Mac/Linux: source .venv/bin/activate)
-pip install -r requirements.txt
+pip install -r requirements.txt     # runtime only (small)
 python -m backend.app
 ```
 
 ### Retrain the model
 ```bash
+pip install -r requirements-train.txt   # adds XGBoost and CatBoost
 python -m ml_pipeline.pipelines.train_pipeline
 ```
+XGBoost and CatBoost are optional; training skips any that are not installed.
 
 ## Tests
 
@@ -132,6 +138,10 @@ The suite covers valid predictions, input validation, error responses (400 / 422
 1. Push this project to GitHub (keep `artifacts/*.pkl` committed so the container can predict).
 2. In Render choose **New → Blueprint** and select the repository. `render.yaml` points to `docker/Dockerfile` and configures a Docker web service with a health check at `/api/health`.
 3. Deploy. Render sets the `PORT` variable and the Dockerfile uses it automatically.
+
+The container installs runtime dependencies only and runs a single Gunicorn worker, so it fits in the free plan's 512 MB of RAM.
+
+Alternatively, choose **New → Web Service**, select the repo, set the language to **Docker**, the Dockerfile path to `./docker/Dockerfile`, and the instance type to **Free**.
 
 On the free plan the service sleeps after inactivity, so the first request can take around 30-60 seconds.
 
