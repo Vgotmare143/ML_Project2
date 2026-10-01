@@ -1,0 +1,10 @@
+services:
+  web:
+    build:
+      context: ..                      # project root, so the whole app is copied in
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../artifacts:/app/artifacts    # trained model.pkl / preprocessor.pkl live here
+    restart: unless-stopped

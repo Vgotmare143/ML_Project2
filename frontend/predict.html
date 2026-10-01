@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Predict a score</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="glass">
+    <h1>Predict a math score</h1>
+    <p class="lede">Enter the student's details, then select Predict score.</p>
+
+    <form id="predict-form" novalidate>
+      <div class="field">
+        <label for="reading_score">Reading score (0-100)</label>
+        <input id="reading_score" name="reading_score" type="number" min="0" max="100" required>
+      </div>
+      <div class="field">
+        <label for="writing_score">Writing score (0-100)</label>
+        <input id="writing_score" name="writing_score" type="number" min="0" max="100" required>
+      </div>
+      <div class="field">
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="race_ethnicity">Group</label>
+        <select id="race_ethnicity" name="race_ethnicity" required>
+          <option>group A</option><option>group B</option><option selected>group C</option>
+          <option>group D</option><option>group E</option>
+        </select>
+      </div>
+      <div class="field wide">
+        <label for="parental_level_of_education">Parental education</label>
+        <select id="parental_level_of_education" name="parental_level_of_education" required>
+          <option>some high school</option><option>high school</option><option selected>some college</option>
+          <option>associate's degree</option><option>bachelor's degree</option><option>master's degree</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="lunch">Lunch type</label>
+        <select id="lunch" name="lunch" required>
+          <option value="standard">Standard</option>
+          <option value="free/reduced">Free / reduced</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="test_preparation_course">Test prep course</label>
+        <select id="test_preparation_course" name="test_preparation_course" required>
+          <option value="none">None</option>
+          <option value="completed">Completed</option>
+        </select>
+      </div>
+      <button class="btn" type="submit" id="submit-btn">Predict score</button>
+    </form>
+
+    <section id="result" aria-live="polite" hidden>
+      <div id="score"></div>
+      <p id="unit"></p>
+      <p id="band"></p>
+      <p id="range"></p>
+    </section>
+    <a class="back" href="/">Back to home</a>
+  </main>
+  <script src="/js/app.js"></script>
+</body>
+</html>
